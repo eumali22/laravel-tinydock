@@ -1,0 +1,26 @@
+FROM php:8.0-fpm-alpine
+
+# install modules
+RUN docker-php-ext-install opcache bcmath
+COPY php/production/opcache.ini /usr/local/etc/php/conf.d/opcache.ini
+
+# install composer
+COPY --from=composer/composer /usr/bin/composer /usr/bin/composer
+
+ENV USER=docker
+ENV UID=1000
+ENV GID=2000
+
+RUN addgroup --gid "$GID" "$USER"
+
+RUN adduser \
+  --disabled-password \
+  --gecos "" \
+  --home "$(pwd)" \
+  --ingroup "$USER" \
+  --no-create-home \
+  --uid "$UID" \
+  "$USER"
+
+# switch to created user
+USER "$USER"
