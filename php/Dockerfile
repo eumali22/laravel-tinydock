@@ -7,12 +7,15 @@ COPY php/production/opcache.ini /usr/local/etc/php/conf.d/opcache.ini
 # install composer
 COPY --from=composer/composer /usr/bin/composer /usr/bin/composer
 
+# set env variables
 ENV USER=docker
 ENV UID=1000
 ENV GID=2000
 
+# create group
 RUN addgroup --gid "$GID" "$USER"
 
+# create user
 RUN adduser \
   --disabled-password \
   --gecos "" \

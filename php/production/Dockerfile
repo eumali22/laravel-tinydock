@@ -7,14 +7,29 @@ COPY php/production/opcache.ini /usr/local/etc/php/conf.d/opcache.ini
 # install composer
 COPY --from=composer/composer /usr/bin/composer /usr/bin/composer
 
-# create group www and user www
-RUN addgroup -S www && adduser -S www -G www
+# set env variables
+ENV USER=docker
+ENV UID=1000
+ENV GID=2000
+
+# create group
+RUN addgroup --gid "$GID" "$USER"
+
+# create user
+RUN adduser \
+  --disabled-password \
+  --gecos "" \
+  --home "$(pwd)" \
+  --ingroup "$USER" \
+  --no-create-home \
+  --uid "$UID" \
+  "$USER"
 
 # copy files from current directory to /var/www/html/public of container
-COPY ./public /var/www/html/public
+COPY . /var/www/html
 
 # copy permissions
-COPY --chown=www:www . /var/www/html
+COPY --chown="$USER":"$USER" . /var/www/html
 
 # switch to created user
-USER www
+USER "$USER"
