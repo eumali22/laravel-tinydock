@@ -33,3 +33,6 @@ COPY --chown="$USER":"$USER" . /var/www/html
 
 # switch to created user
 USER "$USER"
+
+# install dependencies
+RUN composer install --no-dev
