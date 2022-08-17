@@ -10,7 +10,7 @@ COPY --from=composer/composer /usr/bin/composer /usr/bin/composer
 # set env variables
 ENV USER=docker
 ENV UID=1000
-ENV GID=2000
+ENV GID=1000
 
 # create group
 RUN addgroup --gid "$GID" "$USER"

@@ -1,5 +1,6 @@
-version: "3"
+version: "3.7"
 services:
+
   nginx:
     build:
       context: .
@@ -11,6 +12,7 @@ services:
     volumes:
       - .:/var/www/html/
       - ./logs/nginx:/var/log/nginx/
+
   php:
     build:
       context: .
@@ -20,6 +22,17 @@ services:
     volumes:
       - .:/var/www/html/
       - ./logs/php.log:/var/log/fpm-php.www.log
+
+  mysql_container:
+    image: mysql:8.0
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - internal
+    environment:
+      MYSQL_ROOT_PASSWORD: Password123450
+      MYSQL_DATABASE: laravel-tinydock
+
 networks:
   internal:
     driver: bridge

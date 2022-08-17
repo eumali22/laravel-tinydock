@@ -23,10 +23,6 @@ Clone the repository and go to your new project's root directory.
     $ git clone https://github.com/eumali22/laravel-tinydock.git <your-project-name>
     $ cd <your-project-name>
 
-Detach your project from the repo:
-
-    $ git remote rm origin
-
 ### 2. Build Project
 
 Install dependencies:
