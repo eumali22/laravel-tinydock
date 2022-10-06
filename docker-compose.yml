@@ -33,6 +33,9 @@ services:
       MYSQL_ROOT_PASSWORD: Password123450
       MYSQL_DATABASE: laravel-tinydock
 
+volumes:
+   mysql-data:
+   
 networks:
   internal:
     driver: bridge

@@ -44,7 +44,15 @@ Within the project root:
 
     $ docker-compose up
 
-You should now be able to access the Laravel app from this URL: http://localhost:8080
+Before you can register a user, first you need to run the migrate job within the php container. Run a docker command:
+
+    $ docker exec laravel-tinydock-php-1 php artisan migrate
+
+The container name might be different in your machine. You can check the container name by listing all docker processes:
+
+    $ docker ps
+
+After the migration script runs, you should now be able to access the Laravel app from this URL: http://localhost:8080
 
 The project's root directory is mounted as a volume in the docker-compose.yml, so you can edit your development files and immediately see the changes.
 
