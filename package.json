@@ -2,7 +2,9 @@
     "private": true,
     "scripts": {
         "dev": "vite",
-        "build": "vite build"
+        "build": "vite build",
+        "dev-compose-up": "docker compose -f \"docker-compose.yml\" up -d --build",
+        "dev-compose-down": "docker compose -f \"docker-compose.yml\" down"
     },
     "devDependencies": {
         "@tailwindcss/forms": "^0.5.2",

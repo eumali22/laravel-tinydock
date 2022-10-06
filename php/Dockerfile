@@ -1,7 +1,7 @@
 FROM php:8.0-fpm-alpine
 
 # install modules
-RUN docker-php-ext-install opcache bcmath
+RUN docker-php-ext-install opcache bcmath pdo_mysql
 COPY php/production/opcache.ini /usr/local/etc/php/conf.d/opcache.ini
 
 # install composer
